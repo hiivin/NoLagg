@@ -285,7 +285,7 @@ public class CustomExplosion {
 			double force = (1.0 - distanceFactor) * (double) damageFactor;
 
 			// CraftBukkit start - explosion damage hook
-			org.bukkit.entity.Entity damagee = NativeUtil.getEntity(entity);
+			org.bukkit.entity.Entity damagee = entity.getBukkitEntity();
 			int damageDone = (int) (force * (force + 1.0) * 4.0D * tmpsize + 1.0D);
 
 			if (this.source == null) { // Block explosion
@@ -302,7 +302,7 @@ public class CustomExplosion {
 					entity.motZ += tmpZ * force;
 				}
 			} else {
-				final org.bukkit.entity.Entity damager = NativeUtil.getEntity(this.source);
+				final org.bukkit.entity.Entity damager = this.source.getBukkitEntity();
 				final EntityDamageEvent.DamageCause damageCause;
 				if (damager instanceof TNTPrimed) {
 					damageCause = EntityDamageEvent.DamageCause.BLOCK_EXPLOSION;
@@ -334,7 +334,7 @@ public class CustomExplosion {
 	public void doBlocks() {
 		// CraftBukkit start
 		org.bukkit.World bworld = this.world.getWorld();
-		org.bukkit.entity.Entity explode = this.source == null ? null : NativeUtil.getEntity(this.source);
+		org.bukkit.entity.Entity explode = this.source == null ? null : this.source.getBukkitEntity();
 		Location location = new Location(bworld, this.posX, this.posY, this.posZ);
 
 		// generate org.bukkit Block array
